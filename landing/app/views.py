@@ -29,7 +29,17 @@ def landing(request):
 
 
 def stats(request):
+    try:
+        tc = counter_click['test'] / counter_show['test']
+    except ZeroDivisionError:
+        tc = 0
+
+    try:
+        oc = counter_click['original'] / counter_show['original']
+    except ZeroDivisionError:
+        oc = 0
+
     return render_to_response('stats.html', context={
-        'test_conversion': counter_click['test'] / counter_show['test'],
-        'original_conversion': counter_click['original'] / counter_show['original'],
+        'test_conversion': tc,
+        'original_conversion': oc,
     })
